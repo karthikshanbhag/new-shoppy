@@ -66,7 +66,7 @@
 
 import nodemailer from 'nodemailer'
 // import photo from '../data/photo.png'
-const emailer=(user)=>{
+const orderEmailer=(user,oname,oprice)=>{
   
     // const nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
@@ -77,7 +77,7 @@ var transporter = nodemailer.createTransport({
       pass: "691dc1b2645e5f"
     }
   });
-  const emailOptions = (name,recieverEmail)=>{
+  const emailOptions = (name,recieverEmail,oname,oprice)=>{
 //     attachment: [{
 //       filename: 'logo1.png',
 //       path: '/path/logo1.png',
@@ -91,13 +91,13 @@ var transporter = nodemailer.createTransport({
     return {
         from: 'shoppy@sampleMail.com',
         to: recieverEmail,
-        subject: 'Welcome to Shoppy',
+        subject: 'Order Successful',
         html: `
-       <h1> Hi ${name} ! </h1>
+       <h1> Welcome back with a new order ${name} ! </h1>
         <br>
-        <h2> Welcome To our Shoppy. </h2>
+        <h2> Your new order of ${oname} of price ${oprice} is successful. </h2>
         <br>
-        <h2> Look at our latest products on our website. </h2>
+        <h2> You look at our latest products. </h2>
         For any Queries, Please contact : support@shoppy.com
         <br>
         Thanks and Regards
@@ -111,54 +111,13 @@ const mailer = () => {
     // let name = "Roy";
     // let recieverEmail = 'roy@gmail.com'
 
-   const email = emailOptions(user.name,user.email);
+   const email = emailOptions(user.name,user.email,oname,oprice);
 
     transporter.sendMail(email);
+    console.log("email successfull for order")
 
 }
 mailer()
 }
-export default emailer
+export default orderEmailer
 
-
-// const emailer=()=>{
-// const nodemailer = require('nodemailer');
-// var transporter = nodemailer.createTransport({
-//     host: "smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//       user: "23fd44593c950e",
-//       pass: "691dc1b2645e5f"
-//     }
-//   });
-//   const emailOptions = (name,recieverEmail)=>{
-//     return email = {
-//         from: 'sender@sampleMail.com',
-//         to: recieverEmail,
-//         subject: 'Welcome to our website',
-//         html: `
-//        <h1> Hi ${name} ! </h1>
-//         <br>
-//         <h2> Welcome To our Website. </h2>
-//         <br>
-//         For any Queries, Please contact : XXXXXXXXXX
-//         <br>
-//         Thanks and Regards
-//         <br>
-//         Website Team
-//         `
-//     }
-// }
-// const mailer = () => {
-
-//     let name = "Roy";
-//     let recieverEmail = 'roy@gmail.com'
-
-//     email = emailOptions(name,recieverEmail);
-
-//     transporter.sendMail(email);
-
-// }
-// mailer()
-// }
-// export default emailer
